@@ -29,6 +29,3 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-helloworld-api:latest
-
-      - name: Show pushed image reference
-        run: echo "✅ Image pushed to Docker Hub: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-helloworld-api:latest"
