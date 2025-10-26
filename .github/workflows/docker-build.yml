@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build and push
+            - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -37,4 +37,7 @@ jobs:
           file: ./Dockerfile
 
       - name: Show pushed image reference
-        run: echo "Image pushed: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-helloworld-api:latest"
+        run: echo "Image pushed: $DOCKERHUB_USERNAME/nodejs-helloworld-api:latest"
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
