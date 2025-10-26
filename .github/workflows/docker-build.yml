@@ -31,7 +31,4 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-helloworld-api:latest
 
       - name: Show pushed image reference
-             - name: Show pushed image reference
-        run: echo "Image pushed to Docker Hub: ali15401/nodejs-helloworld-api:latest"
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        run: echo "✅ Image pushed to Docker Hub: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-helloworld-api:latest"
