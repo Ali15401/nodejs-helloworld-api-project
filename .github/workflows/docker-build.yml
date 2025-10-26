@@ -1,23 +1,17 @@
-name: Build and push Docker image
+name: Build and Push Docker Image
 
 on:
   push:
     branches:
       - main
 
-permissions:
-  contents: read
-
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -28,16 +22,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-            - name: Build and push
+      - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-helloworld-api:latest
-          file: ./Dockerfile
 
       - name: Show pushed image reference
-        run: echo "Image pushed: $DOCKERHUB_USERNAME/nodejs-helloworld-api:latest"
+        run: echo " Image pushed to Docker Hub: $DOCKERHUB_USERNAME/nodejs-helloworld-api:latest"
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-
